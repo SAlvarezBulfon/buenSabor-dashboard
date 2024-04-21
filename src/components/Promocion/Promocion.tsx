@@ -1,7 +1,10 @@
+import { Box } from "@mui/material"
 
 const Promocion = () => {
   return (
-    <div>Promocion</div>
+    <Box component="main" sx={{ flexGrow: 1, pl:9, pt: 4}}>
+        Promociones
+    </Box>
   )
 }
 
