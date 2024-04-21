@@ -162,14 +162,14 @@ export default function ResponsiveDrawer() {
                       }}
                     >
                       {index === 0 ? <BusinessIcon /> :
-                        index === 1 ? <CategoryIcon /> :
+                        index === 1 ? <CategoryIcon sx={{pl: 1}} /> :
                           index === 2 ? <LocalOfferIcon /> :
                             index === 3 ? <InventoryIcon /> : null}
                     </ListItemIcon>
                     <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                     {text === 'Productos' && (
                       <IconButton onClick={handleSublinksToggle}>
-                        <ExpandMoreIcon />
+                        <ExpandMoreIcon/>
                       </IconButton>
                     )}
                   </ListItemButton>
