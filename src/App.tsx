@@ -5,6 +5,7 @@ import Producto from "./components/Producto/Producto";
 import Categoria from "./components/Categoria/Categoria";
 import Insumo from "./components/Insumo/Insumo";
 import Promocion from "./components/Promocion/Promocion";
+import Inicio from "./components/Inicio/Inicio";
 
 function App() { 
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/categorias" element={<Categoria />} />
           <Route path="/insumos" element={<Insumo />} />
           <Route path="/promociones" element={<Promocion />} />
+          <Route path="/" element={<Inicio />}/>
         </Routes>
       </Router>
     </>

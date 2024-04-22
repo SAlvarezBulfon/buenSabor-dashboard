@@ -22,6 +22,15 @@ import BusinessIcon from '@mui/icons-material/Business';
 import CategoryIcon from '@mui/icons-material/Category';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 260;
@@ -100,6 +109,9 @@ export default function ResponsiveDrawer() {
   const [open, setOpen] = React.useState(false);
   const [openSublinks, setOpenSublinks] = React.useState(false);
 
+  // State for user menu
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -110,6 +122,15 @@ export default function ResponsiveDrawer() {
 
   const handleSublinksToggle = () => {
     setOpenSublinks(!openSublinks);
+  };
+
+  // Functions for user menu
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -129,9 +150,32 @@ export default function ResponsiveDrawer() {
           >
             <MenuIcon />
           </IconButton>
+          
           <Typography variant="h6" noWrap component="div">
-            Dashboard
+            <FastfoodIcon />  Buen Sabor 
           </Typography>
+
+          {/* User Avatar and Menu */}
+          <IconButton
+            color="inherit"
+            onClick={handleMenuOpen}
+            sx={{
+              marginLeft: 'auto',
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <AccountCircleIcon />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={handleMenuClose}> <AccountBoxIcon sx={{pr: 1}}/>  Perfil</MenuItem>
+            <MenuItem onClick={handleMenuClose}><SettingsIcon sx={{pr: 1}}/>  Ajustes</MenuItem>
+            <Divider/>
+            <MenuItem onClick={handleMenuClose}><LogoutIcon sx={{pr: 1}} />  Cerrar Sesión</MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -142,10 +186,10 @@ export default function ResponsiveDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Empresas', 'Productos', 'Promociones', 'Insumos'].map((text, index) => (
+          {['Inicio' ,'Empresas', 'Productos', 'Promociones', 'Insumos'].map((text, index) => (
             <React.Fragment key={text}>
               <ListItem disablePadding sx={{ display: 'block' }}>
-                <Link to={`/${text.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link to={text === 'Inicio' ? '/' : `/${text.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <ListItemButton
                     onClick={text === 'Productos' ? handleSublinksToggle : undefined}
                     sx={{
@@ -161,10 +205,11 @@ export default function ResponsiveDrawer() {
                         justifyContent: 'center',
                       }}
                     >
-                      {index === 0 ? <BusinessIcon /> :
-                        index === 1 ? <CategoryIcon sx={{pl: 1}} /> :
-                          index === 2 ? <LocalOfferIcon /> :
-                            index === 3 ? <InventoryIcon /> : null}
+                      {index === 0 ? <BarChartIcon/>:
+                        index === 1 ?  <BusinessIcon />  :
+                          index === 2 ? <CategoryIcon sx={{pl: 1}}/> :
+                            index === 3 ? <LocalOfferIcon />  : 
+                              index === 4 ? <InventoryIcon /> : null}
                     </ListItemIcon>
                     <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                     {text === 'Productos' && (
@@ -199,4 +244,5 @@ export default function ResponsiveDrawer() {
     </Box>
   );
 }
+
 
