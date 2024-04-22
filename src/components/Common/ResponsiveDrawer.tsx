@@ -136,7 +136,7 @@ export default function ResponsiveDrawer() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open}sx={{bgcolor: '#fb6376'}}>
         <Toolbar>
           <IconButton
             color="inherit"
