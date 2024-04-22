@@ -32,9 +32,9 @@ const InicioCard: React.FC<{ content: Content }> = ({ content }) => {
       </CardContent>
       <CardActions>
       <Link to={`/${title}`} style={{ textDecoration: 'none', color: 'inherit' }} >
-         <Button size="small">Ver más</Button>
+         <Button sx={{color: '#FB6376'}} size="small">Ver más</Button>
       </Link>
-        <Button size="small">Crear</Button>
+        <Button sx={{color: '#FB6376'}} size="small">Crear</Button>
       </CardActions>
     </Card>
   );
