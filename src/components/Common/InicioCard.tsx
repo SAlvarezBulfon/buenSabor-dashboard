@@ -16,7 +16,7 @@ interface Content {
 const InicioCard: React.FC<{ content: Content }> = ({ content }) => {
   const { url, title, content: cardContent } = content;
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, my: 2  }}>
       <CardMedia
         sx={{ height: 140 }}
         image={url}
