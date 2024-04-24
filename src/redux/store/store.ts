@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import articuloManufacturadoSlice from '../slices/articuloManufacturado'
+import { articuloInsumoSlice } from '../slices/articuloInsumo' 
 
 export const store = configureStore({
   reducer: {
-
+    articuloManufacturado: articuloManufacturadoSlice,
+    articuloInsumo: articuloInsumoSlice.reducer, 
   },
 })
 
