@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
+import articuloManufacturadoSlice from '../slices/articuloManufacturado'
 
 export const store = configureStore({
   reducer: {
-
+    articuloManufacturado: articuloManufacturadoSlice,
   },
 })
 
