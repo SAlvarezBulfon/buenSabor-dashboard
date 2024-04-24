@@ -1047,7 +1047,7 @@
     },
     {
       "id": 2,
-      "denominacion": "Pizza Muzarella",
+      "denominacion": "Pizza Margarita",
       "precioVenta": 150,
       "imagenes": [
         {
@@ -1059,7 +1059,7 @@
         "id": 4,
         "denominacion": "Porciones"
       },
-      "descripcion": "Una pizza clasica",
+      "descripcion": "Típica pizza napolitana elaborada con tomate, mozzarella, albahaca fresca, sal y aceite.",
       "tiempoEstimadoMinutos": 15,
       "preparacion": "Pasos de preparacion de una pizza napolitana italiana",
       "articuloManufacturadoDetalles": [

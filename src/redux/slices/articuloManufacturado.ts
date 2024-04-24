@@ -1,14 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import ArticuloManufacturado from '../../types/ArticuloManufacturado'
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import ArticuloManufacturado from '../../types/ArticuloManufacturado';
 
 interface IInitialState {
-  articuloManufactuado: ArticuloManufacturado [];
+  articuloManufacturado: ArticuloManufacturado[];
 }
 
-
-const initialState:  IInitialState = {
-  articuloManufactuado: [],
+const initialState: IInitialState = {
+  articuloManufacturado: [],
 }
 
 export const articuloManufacturadoSlice = createSlice({
@@ -16,14 +15,14 @@ export const articuloManufacturadoSlice = createSlice({
   initialState,
   reducers: {
     setArticuloManufacturado: (state, action: PayloadAction<ArticuloManufacturado[]>) => {
-      state.articuloManufactuado = action.payload;
+      state.articuloManufacturado = action.payload;
     },
     resetArticuloManufacturado: (state) => {
-      state.articuloManufactuado  = [];
+      state.articuloManufacturado = [];
     }
   },
 })
 
-export const { setArticuloManufacturado, resetArticuloManufacturado } = articuloManufacturadoSlice.actions
+export const { setArticuloManufacturado, resetArticuloManufacturado } = articuloManufacturadoSlice.actions;
 
-export default articuloManufacturadoSlice.reducer
+export default articuloManufacturadoSlice.reducer;
