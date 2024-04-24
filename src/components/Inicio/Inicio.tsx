@@ -32,7 +32,7 @@ const Inicio: React.FC = () => {
     return (
         <Box component="main" sx={{ flexGrow: 1, pl: 9, pt: 4}}>
             <Container>
-                <Typography component="h1" variant="h4" color="initial" >Bienvenido</Typography>
+                <Typography component="h1" variant="h5" color="initial" >Bienvenido</Typography>
                         
                 <Grid container spacing={3} sx={{ py: 2, alignContent: 'center' , justifyContent: 'center' }}>
                     <Grid item xs={12} md={6}>
