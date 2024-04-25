@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import ArticuloManufacturado from '../types/ArticuloManufacturado'; 
 import ArticuloInsumo from '../types/ArticuloInsumo';
+import Promocion from '../types/Promocion';
 
 const url = 'http://localhost:3000';
 
@@ -22,6 +23,17 @@ export const getArticulosInsumos = async (): Promise<ArticuloInsumo[]> => {
     return response.data;
   } catch (error) {
     console.error('Error al obtener los artículos insumos:', error);
+    throw error;
+  }
+};
+
+// Función para obtener las promociones
+export const getPromociones = async (): Promise<Promocion[]> => {
+  try {
+    const response: AxiosResponse<Promocion[]> = await axios.get<Promocion[]>(`${url}/promociones`);
+    return response.data;
+  } catch (error) {
+    console.error('Error al obtener las promociones:', error);
     throw error;
   }
 };
