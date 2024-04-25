@@ -316,7 +316,12 @@
           }
         }
       ],
-      "imagenes": []
+      "imagenes": [
+        {
+          "id": 10,
+          "url": "https://images.unsplash.com/photo-1581022295087-35e593704911?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        }
+      ]
     },
     {
       "id": 2,
@@ -360,7 +365,11 @@
           }
         }
       ],
-      "imagenes": []
+      "imagenes": [{
+        "id": 11,
+        "url": "https://plus.unsplash.com/premium_photo-1679436987530-ee11b5600161?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      }
+      ]
     }
   ],
   "pedidos": [
