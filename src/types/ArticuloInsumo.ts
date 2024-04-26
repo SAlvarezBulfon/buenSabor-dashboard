@@ -1,8 +1,7 @@
-import Imagenes from "./IImagenes";
+import Imagenes from "./Imagenes";
 import UnidadMedida from "./UnidadMedida";
 
-interface IArticuloInsumo {
-    id: number;
+interface IArticuloInsumo extends DataModel<IArticuloInsumo> {
     denominacion: string;
     precioVenta: number;
     imagenes: Imagenes [];

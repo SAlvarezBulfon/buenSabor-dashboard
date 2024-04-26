@@ -2,8 +2,7 @@ import ArticuloManufacturadoDetalle from "./ArticuloManufacturadoDetalle";
 import Imagenes from "./Imagenes";
 import UnidadMedida from "./UnidadMedida";
 
-interface IArticuloManufacturado {
-    id: number;
+interface IArticuloManufacturado extends DataModel<IArticuloManufacturado>  {
     denominacion: string;
     precioVenta: number;
     imagenes:Imagenes [];

@@ -1,5 +1,4 @@
-interface IImagenes {
-    id: number;
+interface IImagenes extends DataModel<IImagenes> {
     url: string;
 }
 

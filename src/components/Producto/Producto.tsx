@@ -2,10 +2,11 @@ import  { useEffect, useState } from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { getArticulosManufacturados } from "../../services/services";
 import { setArticuloManufacturado } from "../../redux/slices/articuloManufacturado";
 import TableComponent from "../Table/Table";
 import SearchBar from "../Common/SearchBar";
+import BackendClient from "../../services/BackendClient";
+import IArticuloManufacturado from "../../types/ArticuloManufacturado";
 
 interface Row {
   [key: string]: any;
@@ -23,21 +24,24 @@ const Producto = () => {
     (state) => state.articuloManufacturado.articuloManufacturado
   );
 
-  const [filteredData, setFilteredData] = useState<Row[]>([]); // Estado para los datos filtrados
+  const [filteredData, setFilteredData] = useState<Row[]>([]);
 
   useEffect(() => {
     const fetchArticulosManufacturados = async () => {
       try {
-        const articulos = await getArticulosManufacturados();
-        dispatch(setArticuloManufacturado(articulos));
-        setFilteredData(articulos); // Inicializa los datos filtrados con todos los artículos
+        const articuloManufacturadoClient = new BackendClient<IArticuloManufacturado>('http://localhost:3000/articulosManufacturados');
+
+        // Get all ArticuloManufacturados
+        const articulosManufacturados = await articuloManufacturadoClient.getAll();
+        dispatch(setArticuloManufacturado(articulosManufacturados)); 
+        setFilteredData(articulosManufacturados); 
       } catch (error) {
         console.error("Error al obtener los artículos manufacturados:", error);
       }
     };
 
     fetchArticulosManufacturados();
-  }, [dispatch]);
+  }, [dispatch]); 
 
   const handleSearch = (query: string) => {
     // Filtrar los datos globales según la consulta de búsqueda

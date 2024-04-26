@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography, Button, Container, List, ListItem, ListItemText } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { getPromociones } from "../../services/services";
-import { setPromocion } from "../../redux/slices/Promocion";
 import TableComponent from "../Table/Table";
 import SearchBar from "../Common/SearchBar";
 import PromocionType from "../../types/Promocion";
+import IPromocion from "../../types/Promocion";
+import BackendClient from "../../services/BackendClient";
+import { setPromocion } from "../../redux/slices/Promocion";
 
 interface Row {
   [key: string]: any;
@@ -24,16 +25,19 @@ const Promocion: React.FC = () => {
     (state) => state.promocion.promocion
   );
 
-  const [filteredData, setFilteredData] = useState<PromocionType[]>([]);
+  const [filteredData, setFilteredData] = useState<Row[]>([]);
 
   useEffect(() => {
     const fetchPromociones = async () => {
       try {
-        const promociones = await getPromociones();
-        dispatch(setPromocion(promociones));
-        setFilteredData(promociones);
+        const PromocionesClient = new BackendClient<IPromocion>('http://localhost:3000/promociones');
+
+        // Get all promociones
+        const promociones = await PromocionesClient.getAll();
+        dispatch(setPromocion(promociones)); 
+        setFilteredData(promociones); 
       } catch (error) {
-        console.error("Error al obtener las promociones:", error);
+        console.error("Error al obtener los artículos manufacturados:", error);
       }
     };
 

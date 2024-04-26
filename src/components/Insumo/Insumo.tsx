@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { getArticulosInsumos } from "../../services/services";
-import { setArticuloInsumo } from "../../redux/slices/articuloInsumo";
 import TableComponent from "../Table/Table";
 import SearchBar from "../Common/SearchBar";
 import { Add } from "@mui/icons-material";
+import BackendClient from "../../services/BackendClient";
+import IArticuloInsumo from "../../types/ArticuloInsumo";
+import { setArticuloInsumo } from "../../redux/slices/articuloInsumo";
 
 interface Row {
   [key: string]: any;
@@ -24,18 +25,21 @@ const Insumo = () => {
   const [filteredData, setFilteredData] = useState<Row[]>([]);
 
   useEffect(() => {
-    const fetchArticulosInsumos = async () => {
+    const fetchArticulosManufacturados = async () => {
       try {
-        const articulos = await getArticulosInsumos();
-        dispatch(setArticuloInsumo(articulos));
-        setFilteredData(articulos);
+        const articuloInsumoClient = new BackendClient<IArticuloInsumo>('http://localhost:3000/articulosInsumos');
+
+        // Get all articuloInsumo
+        const articulosInsumos = await articuloInsumoClient.getAll();
+        dispatch(setArticuloInsumo(articulosInsumos)); 
+        setFilteredData(articulosInsumos); 
       } catch (error) {
-        console.error("Error al obtener los artículos insumos:", error);
+        console.error("Error al obtener los artículos manufacturados:", error);
       }
     };
 
-    fetchArticulosInsumos();
-  }, [dispatch]);
+    fetchArticulosManufacturados();
+  }, [dispatch]); 
 
   const handleSearch = (query: string) => {
     const filtered = globalArticulosInsumos.filter((item) =>
