@@ -4,8 +4,8 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon, MoreVert as MoreVertIcon } from '@mui/icons-material';
 import Categoria from '../../types/Categoria';
 
 interface CategoriaListaProps {
@@ -14,12 +14,39 @@ interface CategoriaListaProps {
 
 const CategoriaLista: React.FC<CategoriaListaProps> = ({ categorias }) => {
   const [openMap, setOpenMap] = React.useState<{ [key: number]: boolean }>({});
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+  const [selectedCategoria, setSelectedCategoria] = React.useState<Categoria | null>(null);
 
   const handleClick = (id: number) => {
     setOpenMap((prevOpenMap) => ({
       ...prevOpenMap,
       [id]: !prevOpenMap[id],
     }));
+  };
+
+  const handleEdit = () => {
+    // Aquí maneja la lógica para editar la categoría seleccionada
+    handleMenuClose();
+  };
+
+  const handleDelete = () => {
+    // Aquí maneja la lógica para eliminar la categoría seleccionada
+    handleMenuClose();
+  };
+
+  const handleDetail = () => {
+    // Aquí maneja la lógica para ver los detalles de la categoría seleccionada
+    handleMenuClose();
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setSelectedCategoria(null);
+  };
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>, categoria: Categoria) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedCategoria(categoria);
   };
 
   const renderCategoria = (categoria: Categoria) => {
@@ -30,8 +57,26 @@ const CategoriaLista: React.FC<CategoriaListaProps> = ({ categorias }) => {
       <React.Fragment key={categoria.id}>
         <ListItemButton onClick={() => handleClick(categoria.id)}>
           <ListItemText primary={categoria.denominacion} />
+          <IconButton
+            aria-label="more"
+            aria-controls="categoria-menu"
+            aria-haspopup="true"
+            onClick={(event) => handleMenuOpen(event, categoria)}
+          >
+            <MoreVertIcon />
+          </IconButton>
           {tieneSubcategorias && (isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />)}
         </ListItemButton>
+        <Menu
+          id="categoria-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl && selectedCategoria?.id === categoria.id)}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={handleEdit}>Editar</MenuItem>
+          <MenuItem onClick={handleDelete}>Eliminar</MenuItem>
+          <MenuItem onClick={handleDetail}>Ver Detalle</MenuItem>
+        </Menu>
         {tieneSubcategorias && (
           <Collapse in={isOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
